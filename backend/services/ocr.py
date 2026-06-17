@@ -3,9 +3,29 @@ OCR service — extracts comprehensive structured data from case sheet images.
 Supports single and multi-page (consolidated) extraction.
 """
 
+import io
 import json
 import base64
+from PIL import Image
 from backend.services.llm import chat
+
+_MAX_PX   = 1536   # max dimension sent to LLM
+_JPEG_Q   = 85     # JPEG quality for re-encoded images
+
+
+def _compress(image_bytes: bytes) -> tuple[bytes, str]:
+    """Resize to max _MAX_PX on longest side and re-encode as JPEG."""
+    try:
+        img = Image.open(io.BytesIO(image_bytes)).convert("RGB")
+        w, h = img.size
+        if max(w, h) > _MAX_PX:
+            scale = _MAX_PX / max(w, h)
+            img = img.resize((int(w * scale), int(h * scale)), Image.LANCZOS)
+        buf = io.BytesIO()
+        img.save(buf, format="JPEG", quality=_JPEG_Q, optimize=True)
+        return buf.getvalue(), "image/jpeg"
+    except Exception:
+        return image_bytes, "image/jpeg"
 
 EXTRACTION_PROMPT = """You are a medical document parser for Indian hospitals. Extract EVERY piece of information visible in this case sheet image.
 
@@ -112,6 +132,7 @@ def _add_usage(acc: dict, usage) -> None:
 
 async def _extract_single(image_bytes: bytes, mime_type: str) -> tuple[dict, dict]:
     """Extract from one image page. Returns (data, usage)."""
+    image_bytes, mime_type = _compress(image_bytes)
     b64 = base64.b64encode(image_bytes).decode()
     response = await chat(
         response_format={"type": "json_object"},
