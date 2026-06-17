@@ -1,0 +1,8 @@
+pageindex==0.1.0
+openai==1.35.13
+python-dotenv==1.0.1
+python-frontmatter==1.1.0
+tqdm==4.66.4
+psycopg2-binary>=2.9.9
+sqlalchemy==2.0.31
+httpx==0.27.0
