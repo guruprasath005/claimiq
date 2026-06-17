@@ -1,4 +1,4 @@
-# ClaimIQ — Insurance Claim RCM Tool
+# Stobaeus Docx — Insurance Claim RCM Tool
 
 AI-powered Revenue Cycle Management tool for Indian hospitals. Upload case sheet images, extract all clinical and insurance data, cross-reference against indexed insurer policy trees, and get a claim verdict with actionable checklists — all running on a local Gemma 4 12B model.
 
@@ -68,8 +68,8 @@ AI-powered Revenue Cycle Management tool for Indian hospitals. Upload case sheet
 
 ```bash
 # 1. Clone
-git clone https://github.com/YOUR_ORG/claimiq.git
-cd claimiq
+git clone https://github.com/guruprasath005/stobaeus-docx.git
+cd stobaeus-docx
 
 # 2. Configure
 cp .env.example .env
@@ -95,18 +95,29 @@ Open **http://localhost:5173**
 
 ```bat
 :: 1. Clone and enter directory
-git clone https://github.com/YOUR_ORG/claimiq.git
-cd claimiq
+git clone https://github.com/guruprasath005/stobaeus-docx.git
+cd stobaeus-docx
 
 :: 2. Configure
 copy .env.example .env
 :: Edit .env with Notepad
 
-:: 3. Run everything
+:: 3. First-time setup (installs deps + applies DB schema)
+start.bat --setup
+
+:: 4. Run
 start.bat
 ```
 
-See [`start.bat`](#windows-bat-script) for full details.
+---
+
+## Windows `start.bat` Modes
+
+| Command | What it does |
+|---|---|
+| `start.bat` | Start backend + frontend, open browser |
+| `start.bat --setup` | Create `.venv`, install deps, apply DB schema |
+| `start.bat --index` | Build PageIndex trees from `InsuranceData/` |
 
 ---
 
@@ -118,7 +129,7 @@ See [`start.bat`](#windows-bat-script) for full details.
 | `LLM_MODEL` | `gemma-4-12b-it` | Primary model name |
 | `FALLBACK_API_KEY` | — | OpenAI API key for GPT-4o-mini fallback |
 | `FALLBACK_MODEL` | `gpt-4o-mini` | Fallback model name |
-| `DATABASE_URL` | `postgresql://localhost:5432/claimiq` | PostgreSQL connection string |
+| `DATABASE_URL` | `postgresql://localhost:5432/stobaeus` | PostgreSQL connection string |
 | `INDEX_MODEL_URL` | same as `OPENAI_BASE_URL` | vllm URL used by the indexer |
 | `INDEX_MODEL` | `gemma-4-12b-it` | Model used to build PageIndex trees |
 | `CORS_ORIGINS` | `["http://localhost:5173"]` | Frontend origins allowed by CORS |
@@ -145,7 +156,7 @@ The index only needs to be rebuilt when policy documents change. Each insurer ge
 ## Project Structure
 
 ```
-claimiq/
+stobaeus-docx/
 ├── backend/
 │   ├── config.py               # pydantic-settings config
 │   ├── main.py                 # FastAPI app + CORS

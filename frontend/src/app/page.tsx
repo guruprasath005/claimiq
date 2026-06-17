@@ -47,7 +47,7 @@ export default function CapturePage() {
 
   return (
     <main className="min-h-screen flex flex-col items-center justify-center gap-8 p-6 bg-slate-50">
-      <h1 className="text-2xl font-semibold text-slate-800">Insurance Claim Assistant</h1>
+      <h1 className="text-2xl font-semibold text-slate-800">Stobaeus Docx</h1>
 
       <div
         className="w-full max-w-md border-2 border-dashed border-slate-300 rounded-2xl p-12

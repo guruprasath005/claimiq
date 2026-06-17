@@ -25,7 +25,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   const pageTitle = (() => {
     if (location.pathname.startsWith('/case/')) return 'Case Detail'
-    return PAGE_TITLES[location.pathname] ?? 'ClaimIQ'
+    return PAGE_TITLES[location.pathname] ?? 'Stobaeus Docx'
   })()
 
   return (
@@ -36,10 +36,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         {/* Wordmark */}
         <div className="px-6 pt-7 pb-5">
           <p className="text-[26px] font-extrabold tracking-tight text-gray-900 leading-none select-none">
-            ClaimIQ
+            Stobaeus
           </p>
           <p className="text-[11px] text-gray-400 font-medium mt-0.5 tracking-widest uppercase">
-            RCM Tool
+            Docx
           </p>
         </div>
 
@@ -87,7 +87,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             </div>
             <div className="min-w-0">
               <p className="text-[13px] font-semibold text-gray-900 truncate leading-none">City Hospital</p>
-              <p className="text-[11px] text-gray-400 mt-0.5">RCM Billing</p>
+              <p className="text-[11px] text-gray-400 mt-0.5">Stobaeus Docx</p>
             </div>
           </div>
         </div>
@@ -103,7 +103,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </h1>
 
           <div className="flex items-center gap-4">
-            <span className="text-sm text-gray-400 font-medium">RCM Billing</span>
+            <span className="text-sm text-gray-400 font-medium">Stobaeus Docx</span>
 
             <div style={{ width: 1, height: 20, background: '#E5E7EB' }} />
 

@@ -2,7 +2,7 @@
 setlocal EnableDelayedExpansion
 
 :: ─────────────────────────────────────────────────────────────────────────────
-::  ClaimIQ — Windows launcher
+::  Stobaeus Docx — Windows launcher
 ::  Usage:
 ::    start.bat           Run backend + frontend dev servers
 ::    start.bat --index   Build the insurance PageIndex trees only
@@ -106,17 +106,17 @@ if not exist "web\node_modules" (
 )
 
 echo.
-echo  Starting ClaimIQ...
+echo  Starting Stobaeus Docx...
 echo.
 
 :: ── Launch backend in a new window ───────────────────────────────────────────
-start "ClaimIQ Backend" cmd /k "cd /d %ROOT% && call .venv\Scripts\activate.bat && python -m uvicorn backend.main:app --reload --host 0.0.0.0 --port 8000"
+start "Stobaeus Docx Backend" cmd /k "cd /d %ROOT% && call .venv\Scripts\activate.bat && python -m uvicorn backend.main:app --reload --host 0.0.0.0 --port 8000"
 
 :: Small delay so backend starts before frontend
 timeout /t 2 /nobreak >nul
 
 :: ── Launch frontend in a new window ──────────────────────────────────────────
-start "ClaimIQ Frontend" cmd /k "cd /d %ROOT%\web && npm run dev"
+start "Stobaeus Docx Frontend" cmd /k "cd /d %ROOT%\web && npm run dev"
 
 :: ── Open browser after brief delay ───────────────────────────────────────────
 timeout /t 4 /nobreak >nul
@@ -145,7 +145,7 @@ echo  ██║     ██║     ██╔══██║██║██║╚�
 echo  ╚██████╗███████╗██║  ██║██║██║ ╚═╝ ██║    ██║╚██████╔╝
 echo   ╚═════╝╚══════╝╚═╝  ╚═╝╚═╝╚═╝     ╚═╝    ╚═╝ ╚══▀▀═╝
 echo.
-echo  Insurance Claim RCM Tool  ^|  Powered by Gemma 4 12B
+echo  Insurance Claim RCM Tool  ^|  Stobaeus Docx  ^|  Powered by Gemma 4 12B
 echo  ────────────────────────────────────────────────────
 echo.
 exit /b 0

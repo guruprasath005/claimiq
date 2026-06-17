@@ -4,7 +4,7 @@ from backend.config import settings
 from backend.routers import upload, schemes, evaluate
 from backend.routers import cases, reports, settings_router
 
-app = FastAPI(title="Insurance Claim Assistant", version="0.2.0")
+app = FastAPI(title="Stobaeus Docx", version="0.2.0")
 
 app.add_middleware(
     CORSMiddleware,
